@@ -8,14 +8,18 @@ from matplotlib import pyplot as plt
 # sns.set
 
 # get prices
-code = 'SPY AAPL'
-start = dt.date(2023,1,1)
+codelist = ["AAPL","AMZN","MSFT","GOOGL"]
+start = dt.date(2020,1,1)
 end = dt.date.today()
-data = yf.download(code, start=start, end=end)
-print(data.head())
+data = yf.download(codelist, start=start, end=end)["Adj Close"]
+print(data.head().append(data.tail()))
+
+# convert to percentage ( to compare by same criteria )
+df_all=(1+data.pct_change()).cumprod()
+print(df_all.head().append(df_all.tail()))
 
 # plot
-data.plot(figsize=(8,6),fontsize=18)
+df_all.plot(figsize=(8,6),fontsize=18)
 plt.legend(bbox_to_anchor=(0, 1), loc='upper left', borderaxespad=1, fontsize=18)
 plt.grid(True)
 plt.show()
