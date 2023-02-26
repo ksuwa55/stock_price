@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 class Analyse_Data():
 
     def __init__(self, start, end, value) -> None:
-        self.codes = []
+        self.codes = ['GOOG', 'AAPL']
         self.start = start
         self.end = end
         self.value = value
